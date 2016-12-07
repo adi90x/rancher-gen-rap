@@ -44,6 +44,7 @@ build-my-project:
     - cd $CURRENT_BUILD_PATH
     - echo $(pwd)
     - echo $CURRENT_BUILD_PATH
+    - ls
     - cd go-rancher-gen
     - go build
 
