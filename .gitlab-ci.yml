@@ -34,5 +34,6 @@ install-go:
     - cp -R /builds/adi90x/ $HOME/gopath/adi90x/
     - cd $HOME/gopath/adi90x/go-rancher-gen
     - go get github.com/Sirupsen/logrus
-    - go build main.go
+    - go build 
+    - ls
     - ./main version
