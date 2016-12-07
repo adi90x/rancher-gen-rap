@@ -37,5 +37,4 @@ install-go:
     - go get github.com/BurntSushi/toml
     - go get github.com/rancher/go-rancher-metadata/metadata
     - go build 
-    - ls
-    - ./main version
+    - go-rancher-gen version
