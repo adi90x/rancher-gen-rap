@@ -42,6 +42,7 @@ build-my-project:
   stage: build
   script:
     - cd $CURRENT_BUILD_PATH
+    - echo $(pwd)
     - go build
 
 test-my-project:
