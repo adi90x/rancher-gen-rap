@@ -32,6 +32,6 @@ install-go:
     - go env
     - which go
     - cp -R /builds/adi90x/ $HOME/gopath/adi90x/
-    - cd $HOME/gopath/adi90x/Gotest 
+    - cd $HOME/gopath/adi90x/go-rancher-gen
     - go build main.go
     - ./main
