@@ -12,6 +12,18 @@ import (
 	log "github.com/Sirupsen/logrus"
 )
 
+func exists(path string) (bool, error) {
+	_, err := os.Stat(path)
+	if err == nil {
+		return true, nil
+	}
+	if os.IsNotExist(err) {
+		return false, nil
+	}
+	return false, err
+}
+
+
 func newFuncMap(ctx *TemplateContext) template.FuncMap {
 	return template.FuncMap{
 		// Utility funcs
@@ -112,6 +124,52 @@ func groupByLabel(label string, in interface{}) (map[string][]interface{}, error
 			value, ok := h.Labels[label]
 			if ok && len(value) > 0 {
 				m[value] = append(m[value], h)
+			}
+		}
+	default:
+		return m, fmt.Errorf("(groupByLabel) invalid input type %T", in)
+	}
+
+	return m, nil
+}
+
+//Adding GroupbyMulti
+func groupByMulti(label string, in interface{},sep string) (map[string][]interface{}, error) {
+	m := make(map[string][]interface{})
+
+	if in == nil {
+		return m, fmt.Errorf("(groupByLabel) input is nil")
+	}
+
+	switch typed := in.(type) {
+	case []Service:
+		for _, s := range typed {
+			value, ok := s.Labels[label]
+			if ok && len(value) > 0 {
+				items := strings.Split(value.(string), sep)
+				for _, item := range items {
+				m[value] = append(m[value], s)
+				}
+			}
+		}
+	case []Container:
+		for _, c := range typed {
+			value, ok := c.Labels[label]
+			if ok && len(value) > 0 {
+				items := strings.Split(value.(string), sep)
+				for _, item := range items {
+				m[value] = append(m[value], c)
+				}
+			}
+		}
+	case []Host:
+		for _, h := range typed {
+			value, ok := h.Labels[label]
+			if ok && len(value) > 0 {
+				items := strings.Split(value.(string), sep)
+				for _, item := range items {
+				m[value] = append(m[value], h)
+				}
 			}
 		}
 	default:
