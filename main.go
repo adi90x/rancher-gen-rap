@@ -10,7 +10,7 @@ import (
 
 var (
 	// Must be set at build time
-	Version string = "UNDEFINED"
+	Version string = "Adrien"
 	GitSHA  string = "UNDEFINED"
 
 	configFile      string
