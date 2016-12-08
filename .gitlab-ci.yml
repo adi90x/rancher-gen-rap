@@ -12,7 +12,7 @@
 # down as needed
 
 
-install-go:
+compile-go:
   script:
     - export CURRENT_BUILD_PATH=$(pwd)
     - echo $PATH
