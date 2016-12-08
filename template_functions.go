@@ -146,7 +146,7 @@ func groupByMulti(label string, in interface{},sep string) (map[string][]interfa
 		for _, s := range typed {
 			value, ok := s.Labels[label]
 			if ok && len(value) > 0 {
-				items := strings.Split(value.(string), sep)
+				items := strings.Split(string(value), sep)
 				for _, item := range items {
 				m[value] = append(m[value], s)
 				}
@@ -156,7 +156,7 @@ func groupByMulti(label string, in interface{},sep string) (map[string][]interfa
 		for _, c := range typed {
 			value, ok := c.Labels[label]
 			if ok && len(value) > 0 {
-				items := strings.Split(value.(string), sep)
+				items := strings.Split(string(value), sep)
 				for _, item := range items {
 				m[value] = append(m[value], c)
 				}
@@ -166,7 +166,7 @@ func groupByMulti(label string, in interface{},sep string) (map[string][]interfa
 		for _, h := range typed {
 			value, ok := h.Labels[label]
 			if ok && len(value) > 0 {
-				items := strings.Split(value.(string), sep)
+				items := strings.Split(string(value), sep)
 				for _, item := range items {
 				m[value] = append(m[value], h)
 				}
