@@ -47,6 +47,9 @@ func newFuncMap(ctx *TemplateContext) template.FuncMap {
 		"whereLabelEquals":  whereLabelEquals,
 		"whereLabelMatches": whereLabelEquals,
 		"groupByLabel":      groupByLabel,
+		//Add by Adrien
+		"exists":            exists,
+		"groupByMulti":      groupByMulti,
 	}
 }
 
@@ -134,7 +137,7 @@ func groupByLabel(label string, in interface{}) (map[string][]interface{}, error
 }
 
 //Adding GroupbyMulti
-func groupByMulti(label string, in interface{},sep string) (map[string][]interface{}, error) {
+func groupByMulti(label string, sep string, in interface{}) (map[string][]interface{}, error) {
 	m := make(map[string][]interface{})
 
 	if in == nil {
