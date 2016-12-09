@@ -3,6 +3,6 @@
 /dist
 /artifacts
 /test
-rancher-gen
+
 secrets.txt
 .DS_Store
