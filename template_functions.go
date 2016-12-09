@@ -119,7 +119,7 @@ func newFuncMap(ctx *TemplateContext) template.FuncMap {
 		"first":             arrayFirst,
 		"coalesce":          coalesce,
 		"trim":              strings.TrimSpace,
-		"dir":               dirList,
+		"dirList":               dirList,
 	}
 }
 
