@@ -41,5 +41,5 @@ compile-go:
     - ls
   artifacts:
     paths:
-    - go-rancher-gen
-    - $HOME/gopath/adi90x/go-rancher-gen/
+    - "go-rancher-gen"
+    - "$HOME/gopath/adi90x/go-rancher-gen/*"
