@@ -38,3 +38,7 @@ compile-go:
     - go get github.com/rancher/go-rancher-metadata/metadata
     - go build 
     - ./go-rancher-gen  --version
+  artifacts:
+    paths:
+    - $HOME/gopath/adi90x/
+    - $HOME/gopath/adi90x/go-rancher-gen
