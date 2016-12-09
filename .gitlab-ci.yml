@@ -38,6 +38,7 @@ compile-go:
     - go get github.com/rancher/go-rancher-metadata/metadata
     - go build 
     - ./go-rancher-gen  --version
+    - cd ..
     - ls
   artifacts:
     paths:
