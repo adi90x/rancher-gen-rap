@@ -9,6 +9,7 @@ import (
 	"text/template"
 	"time"
 	"reflect"
+	"io/ioutil"
 
 	log "github.com/Sirupsen/logrus"
 )
@@ -71,6 +72,20 @@ func coalesce(input ...interface{}) interface{} {
 	}
 	return nil
 }
+// RAP : dirList ( from jwilder/dockergen)
+func dirList(path string) ([]string, error) {
+	names := []string{}
+	files, err := ioutil.ReadDir(path)
+	if err != nil {
+		log.Printf("Template error: %v", err)
+		return names, nil
+	}
+	for _, f := range files {
+		names = append(names, f.Name())
+	}
+	return names, nil
+}
+
 func newFuncMap(ctx *TemplateContext) template.FuncMap {
 	return template.FuncMap{
 		// Utility funcs
@@ -103,7 +118,8 @@ func newFuncMap(ctx *TemplateContext) template.FuncMap {
 		"closest":           arrayClosest,
 		"first":             arrayFirst,
 		"coalesce":          coalesce,
-		"trim":              strings.TrimSpace,    
+		"trim":              strings.TrimSpace,
+		"dir":               dirList,
 	}
 }
 
