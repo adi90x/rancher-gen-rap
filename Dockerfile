@@ -1,12 +1,13 @@
 FROM alpine:edge
-MAINTAINER <jan@rancher.com>
+MAINTAINER <amaurel90@gmail.com>
 
 RUN apk add --no-cache ca-certificates
-
+RUN apk add --no-cache nano
+RUN apk add --no-cache unzip
 ENV RANCHER_GEN_RELEASE v0.2.0
 
-ADD https://github.com/janeczku/go-rancher-gen/releases/download/${RANCHER_GEN_RELEASE}/rancher-gen-linux-amd64.tar.gz /tmp/rancher-gen.tar.gz
-RUN tar -zxvf /tmp/rancher-gen.tar.gz -C /usr/local/bin \
+RUN wget -O /tmp/rancher-gen.zip  https://gitlab.com/adi90x/go-rancher-gen/builds/artifacts/master/download?job=compile-go
+RUN unzip /tmp/rancher-gen.zip -d /usr/local/bin \
 	&& chmod +x /usr/local/bin/rancher-gen
 
 ENTRYPOINT ["/usr/local/bin/rancher-gen"]

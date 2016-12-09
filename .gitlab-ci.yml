@@ -31,10 +31,13 @@ compile-go:
     - echo $PATH
     - go env
     - which go
-    - cp -R /builds/adi90x/ $HOME/gopath/adi90x/
-    - cd $HOME/gopath/adi90x/go-rancher-gen
+    - cd /builds/adi90x/go-rancher-gen
     - go get github.com/Sirupsen/logrus
     - go get github.com/BurntSushi/toml
     - go get github.com/rancher/go-rancher-metadata/metadata
     - go build 
     - ./go-rancher-gen  --version
+    - mv go-rancher-gen rancher-gen
+  artifacts:
+    paths:
+    - "rancher-gen"
