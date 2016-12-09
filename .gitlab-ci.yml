@@ -40,4 +40,3 @@ compile-go:
   artifacts:
     paths:
     - "go-rancher-gen"
-    - "adi90x/go-rancher-gen"
