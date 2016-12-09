@@ -103,7 +103,7 @@ func newFuncMap(ctx *TemplateContext) template.FuncMap {
 		"closest":           arrayClosest,
 		"first":             arrayFirst,
 		"coalesce":          coalesce,
-		"trim":              strings.TrimSpaces,    
+		"trim":              strings.TrimSpace,    
 	}
 }
 
