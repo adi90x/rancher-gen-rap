@@ -11,7 +11,7 @@ import (
 
 	log "github.com/Sirupsen/logrus"
 )
-
+//RAP : GroupbyMulti ( from jwilder/dockergen)
 func exists(path string) (bool, error) {
 	_, err := os.Stat(path)
 	if err == nil {
@@ -22,7 +22,7 @@ func exists(path string) (bool, error) {
 	}
 	return false, err
 }
-
+//RAP : dict ( from jwilder/dockergen)
 func dict(values ...interface{}) (map[string]interface{}, error) {
 	if len(values)%2 != 0 {
 		return nil, fmt.Errorf("invalid dict call")
@@ -37,7 +37,39 @@ func dict(values ...interface{}) (map[string]interface{}, error) {
 	}
 	return dict, nil
 }
+//RAP : arrayClosest ( from jwilder/dockergen)
+func arrayClosest(values []string, input string) string {
+	best := ""
+	for _, v := range values {
+		if strings.Contains(input, v) && len(v) > len(best) {
+			best = v
+		}
+	}
+	return best
+}
+//RAP : arrayFirst ( from jwilder/dockergen)
+func arrayFirst(input interface{}) interface{} {
+	if input == nil {
+		return nil
+	}
 
+	arr := reflect.ValueOf(input)
+
+	if arr.Len() == 0 {
+		return nil
+	}
+
+	return arr.Index(0).Interface()
+}
+//RAP : coalesce ( from jwilder/dockergen)
+func coalesce(input ...interface{}) interface{} {
+	for _, v := range input {
+		if v != nil {
+			return v
+		}
+	}
+	return nil
+}
 func newFuncMap(ctx *TemplateContext) template.FuncMap {
 	return template.FuncMap{
 		// Utility funcs
@@ -61,10 +93,15 @@ func newFuncMap(ctx *TemplateContext) template.FuncMap {
 		"whereLabelEquals":  whereLabelEquals,
 		"whereLabelMatches": whereLabelEquals,
 		"groupByLabel":      groupByLabel,
-		//Add by Adrien
+		
+		//Add for Rancher-Active-Proxy (from jwilder/docker-gen)
 		"exists":            exists,
 		"groupByMulti":      groupByMulti,
 		"dict":              dict,
+		"trimSuffix":        strings.TrimSuffix,
+		"closest":           arrayClosest,
+		"first":             arrayFirst,
+		"coalesce":          coalesce,
 	}
 }
 
@@ -151,7 +188,7 @@ func groupByLabel(label string, in interface{}) (map[string][]interface{}, error
 	return m, nil
 }
 
-//Adding GroupbyMulti
+//RAP : GroupbyMulti ( from jwilder/dockergen)
 func groupByMulti(label string, sep string, in interface{}) (map[string][]interface{}, error) {
 	m := make(map[string][]interface{})
 
