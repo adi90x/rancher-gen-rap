@@ -33,6 +33,7 @@ compile-go:
     #- echo $PATH
     #- go env
     #- which go
+    - apk add --no-cache git
     - cd /builds/adi90x/go-rancher-gen
     - go get github.com/Sirupsen/logrus
     - go get github.com/BurntSushi/toml
