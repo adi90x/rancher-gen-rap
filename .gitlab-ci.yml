@@ -21,6 +21,7 @@ compile-go:
     - rm -rf $HOME/gopath
     - mkdir -p $HOME/golang # for GOROOT (contains the Go binary & core packages)
     - mkdir -p $HOME/gopath # for GOPATH (contains code and external packages)
+    - apk add --no-cache curl
     - curl https://storage.googleapis.com/golang/go1.7.4.linux-amd64.tar.gz 2>/dev/null > go1.7.4.linux-amd64.tar.gz
     - tar -C $HOME/golang -xzf go1.7.4.linux-amd64.tar.gz
     - export GOROOT=$HOME/golang/go
