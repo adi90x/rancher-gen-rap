@@ -1,3 +1,21 @@
+
+Fork from go-rancher-gen
+========================
+
+Adding some function : 
+
+### `exist`
+
+Check if a file exist.
+
+### `groupByMulti`
+
+Same function as default groupby but split label by `sep` in order to allow multiple input value in one label .
+
+
+
+# Below the ORIGINAL README
+
 go-rancher-gen
 ===============
 [![Latest Version](https://img.shields.io/github/release/janeczku/go-rancher-gen.svg?maxAge=600)][release]
