@@ -11,6 +11,7 @@
 # or weird in your environment - feel free to trim it 
 # down as needed
 
+image: alpine:edge
 
 compile-go:
   script:
