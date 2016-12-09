@@ -1,4 +1,3 @@
-
 Fork from go-rancher-gen
 ========================
 
@@ -13,6 +12,7 @@ Check if a file exist.
 Same function as default groupby but split label by `sep` in order to allow multiple input value in one label .
 
 
+Auto build from gitlab CI is available : [Rancher-gen](https://gitlab.com/adi90x/builds/artifacts/master/download?job=compile-go)
 
 # Below the ORIGINAL README
 
