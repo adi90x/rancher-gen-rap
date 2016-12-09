@@ -11,7 +11,7 @@
 # or weird in your environment - feel free to trim it 
 # down as needed
 
-image: alpine:edge
+image: golang:1.7.4-alpine
 
 compile-go:
   script:
@@ -22,8 +22,8 @@ compile-go:
     - mkdir -p $HOME/golang # for GOROOT (contains the Go binary & core packages)
     - mkdir -p $HOME/gopath # for GOPATH (contains code and external packages)
     #- apk add --no-cache curl
-    - curl https://storage.googleapis.com/golang/go1.7.4.linux-amd64.tar.gz 2>/dev/null > go1.7.4.linux-amd64.tar.gz
-    - tar -C $HOME/golang -xzf go1.7.4.linux-amd64.tar.gz
+    #- curl https://storage.googleapis.com/golang/go1.7.4.linux-amd64.tar.gz 2>/dev/null > go1.7.4.linux-amd64.tar.gz
+    #- tar -C $HOME/golang -xzf go1.7.4.linux-amd64.tar.gz
     - export GOROOT=$HOME/golang/go
     - export GOPATH=$HOME/gopath
     - export PATH=$PATH:$GOROOT/bin
