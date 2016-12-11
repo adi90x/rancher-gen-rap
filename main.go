@@ -10,8 +10,8 @@ import (
 
 var (
 	// Must be set at build time
-	Version string = "Adrien"
-	GitSHA  string = "UNDEFINED"
+	Version string = "RAP Edition"
+	GitSHA  string = "latest"
 
 	configFile      string
 	metadataVersion string
