@@ -17,3 +17,4 @@ compile-go:
   artifacts:
     paths:
     - "rancher-gen"
+    name: "Rancher-Gen-RAP"
