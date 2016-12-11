@@ -12,8 +12,8 @@ compile-go:
     - go get github.com/BurntSushi/toml
     - go get github.com/rancher/go-rancher-metadata/metadata
     - go build 
-    - ./go-rancher-gen  --version
-    - mv go-rancher-gen rancher-gen
+    - ./rancher-gen-rap  --version
+    - mv rancher-gen-rap rancher-gen
   artifacts:
     paths:
     - "rancher-gen"
