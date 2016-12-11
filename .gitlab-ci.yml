@@ -7,7 +7,7 @@ image: golang:1.7.4-alpine
 compile-go:
   script:
     - apk add --no-cache git
-    - cd /builds/adi90x/go-rancher-gen
+    - cd /builds/adi90x/rancher-gen-rap
     - go get github.com/Sirupsen/logrus
     - go get github.com/BurntSushi/toml
     - go get github.com/rancher/go-rancher-metadata/metadata
