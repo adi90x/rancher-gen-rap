@@ -1,7 +1,16 @@
-Fork from go-rancher-gen
-========================
+Rancher-Gen-RAP
+===============
 
-Adding some function : 
+Fork from the excellent [janeczku/go-rancher-gen](https://github.com/janeczku/go-rancher-gen) 
+
+Original Readme give all information !
+
+This fork is used to build Rancher-Active-Proxy.
+
+This repo is auto build on push : [Rancher-gen-RAP](https://gitlab.com/adi90x/rancher-gen-rap/builds/artifacts/master/download?job=compile-go)
+
+This build add some more function available in template :
+
 
 ### `exist`
 
@@ -11,31 +20,36 @@ Check if a file exist.
 
 Same function as default groupby but split label by `sep` in order to allow multiple input value in one label .
 
+### `dict`
 
-Auto build from gitlab CI is available : [Rancher-gen](https://gitlab.com/adi90x/go-rancher-gen/builds/artifacts/master/download?job=compile-go)
+Function from jwilder/dockergen : simple way to send multiple value to a template .
 
-# Below the ORIGINAL README
+### `trimSuffix`
 
-go-rancher-gen
-===============
-[![Latest Version](https://img.shields.io/github/release/janeczku/go-rancher-gen.svg?maxAge=600)][release]
-[![CircleCI](https://img.shields.io/circleci/project/janeczku/go-rancher-gen.svg)][circleci]
-[![Docker Pulls](https://img.shields.io/docker/pulls/janeczku/rancher-gen.svg?maxAge=600)][hub]
-[![License](https://img.shields.io/github/license/janeczku/go-rancher-gen.svg?maxAge=600)][license]
+Original Go strings.TrimSuffix function => get ride of the suffix .
 
-[release]: https://github.com/janeczku/go-rancher-gen/releases
-[circleci]: https://circleci.com/gh/janeczku/go-rancher-gen
-[hub]: https://hub.docker.com/r/janeczku/rancher-gen/
-[license]: LICENSE
+### `closest`
 
-`rancher-gen` is a file generator that renders templates using [Rancher Metadata](http://docs.rancher.com/rancher/metadata-service/).
+Function from jwilder/dockergen : get the best matching value from an array .
 
-**Core features:**
+### `first`
 
-+ Powerful template syntax that embraces [Rancher](http://www.rancher.com) services, containers and hosts as first-class objects
-+ Ability to run arbitrary commands when a file has been updated (e.g. to reload an application's configuration)
-+ Ability to run check commands on staged files before updating the destination files
-+ Ability to specify multiple template sets using a TOML config file
+Function from jwilder/dockergen : get the first value from an array .
+
+### `coalesce`
+
+Function from jwilder/dockergen : return first non nil value .
+
+### `trim`
+
+Original Go strings.TrimSpace function
+
+### `dirList`
+
+Function from jwilder/dockergen : list files from a directory .
+
+
+# Below is taken from the ORIGINAL README
 
 Usage
 ------------
