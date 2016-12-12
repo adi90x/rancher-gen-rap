@@ -1,3 +1,5 @@
+[![build status](https://gitlab.com/adi90x/rancher-gen-rap/badges/master/build.svg)](https://gitlab.com/adi90x/rancher-gen-rap/commits/master)![License MIT](https://img.shields.io/badge/license-MIT-blue.svg) 
+
 Rancher-Gen-RAP
 ===============
 
