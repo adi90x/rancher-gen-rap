@@ -23,7 +23,7 @@ compile-go:
     - "rancher-gen"
     name: "Rancher-Gen-RAP"
     
-rebuild-rap
+rebuild-rap:
     stages: deploy
     script:
         - "curl -X POST -F token=$TOKEN_RAP -F ref=master https://gitlab.com/api/v3/projects/1039242/trigger/builds"
