@@ -1,10 +1,14 @@
 # See docs/examples
 # http://doc.gitlab.com/ce/ci/quick_start/README.html
 # http://doc.gitlab.com/ce/ci/yaml/README.html
-
+stages:
+  - build
+  - deploy
+  
 image: golang:1.7.4-alpine
 
 compile-go:
+  stages: build
   script:
     - apk add --no-cache git
     - cd /builds/adi90x/rancher-gen-rap
@@ -18,3 +22,8 @@ compile-go:
     paths:
     - "rancher-gen"
     name: "Rancher-Gen-RAP"
+    
+rebuild-rap
+    stages: deploy
+    script:
+        - "curl -X POST -F token=$TOKEN_RAP -F ref=master https://gitlab.com/api/v3/projects/1039242/trigger/builds"
