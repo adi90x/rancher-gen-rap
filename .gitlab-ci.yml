@@ -26,4 +26,5 @@ compile-go:
 rebuild-rap:
     stage: deploy
     script:
-        - "curl -X POST -F token=$TOKEN_RAP -F ref=master https://gitlab.com/api/v3/projects/1039242/trigger/builds"
+        - apk add --no-cache git
+        - curl -X POST -F token=$TOKEN_RAP -F ref=master https://gitlab.com/api/v3/projects/1039242/trigger/builds
