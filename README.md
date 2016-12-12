@@ -5,7 +5,7 @@ Rancher-Gen-RAP
 
 Fork from the excellent [janeczku/go-rancher-gen](https://github.com/janeczku/go-rancher-gen) 
 
-Original Readme give all information !
+Original Readme give most information !
 
 This fork is used to build Rancher-Active-Proxy.
 
