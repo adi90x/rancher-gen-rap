@@ -5,14 +5,13 @@ Rancher-Gen-RAP
 
 Fork from the excellent [janeczku/go-rancher-gen](https://github.com/janeczku/go-rancher-gen) 
 
-Original Readme give most information !
-
-This fork is used to build Rancher-Active-Proxy.
+This fork is used to build [adi90x/rancher-active-proxy](https://gitlab.com/adi90x/rancher-active-proxy).
 
 This repo is auto build on push : [Rancher-gen-RAP](https://gitlab.com/adi90x/rancher-gen-rap/builds/artifacts/master/download?job=compile-go)
 
-This build add some more function available in template :
+This repo is build using Go 1.7 to get nicer templates !
 
+Original Readme give most information but those functions have also been added : 
 
 ### `exist`
 
