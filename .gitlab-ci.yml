@@ -26,5 +26,7 @@ compile-go:
 rebuild-rap:
     stage: deploy
     script:
-        - apk add --no-cache curl
+        - apk add --no-cache curl wget unzip
+        - wget "https://gitlab.com/adi90x/rancher-gen-rap/builds/artifacts/master/download?job=compile-go" -O /tmp/rancher-gen-rap.zip
+	    - unzip rancher-gen-rap.zip
         - curl -X POST -F token=$TOKEN_RAP -F ref=$CI_BUILD_REF_NAME https://gitlab.com/api/v3/projects/2147378/trigger/builds
