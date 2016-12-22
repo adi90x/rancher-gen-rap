@@ -319,9 +319,13 @@ func (r *runner) createContext() (*TemplateContext, error) {
 func parseServicePorts(ports []string) []ServicePort {
 	var ret []ServicePort
 	for _, port := range ports {
+		log.Warnf("Value of port : %s", port)
 		if parts := strings.Split(port, ":"); len(parts) == 2 {
+			log.Warnf("Value of parts : %s", parts)
 			public := parts[0]
+			log.Warnf("Value of public : %s", public)
 			if parts_ := strings.Split(parts[1], "/"); len(parts_) == 2 {
+				log.Warnf("Value of parts_ : %s", parts_)
 				ret = append(ret, ServicePort{
 					PublicPort:   public,
 					InternalPort: parts_[0],
