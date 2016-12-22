@@ -9,7 +9,7 @@ This fork is used to build [adi90x/rancher-active-proxy](https://gitlab.com/adi9
 
 This repo is auto build on push : [Rancher-gen-RAP](https://gitlab.com/adi90x/rancher-gen-rap/builds/artifacts/master/download?job=compile-go)
 
-This repo is build using Go 1.7 to get nicer templates !
+This repo is build using Go 1.7 to enable nicer templates !
 
 Original Readme give most information but those functions have also been added : 
 
