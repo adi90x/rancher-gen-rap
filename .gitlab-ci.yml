@@ -7,7 +7,7 @@ stages:
   
 image: golang:1.7.4-alpine
 
-compile-go:
+compile:
   stage: build
   script:
     - apk add --no-cache git
