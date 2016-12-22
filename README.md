@@ -11,7 +11,7 @@ This repo is auto build on push : [Rancher-gen-RAP](https://gitlab.com/adi90x/ra
 
 This repo is build using Go 1.7 to enable nicer templates !
 
-Original Readme give most information but those functions have also been added : 
+Original Readme give most information but those functions have also been added :
 
 ### `exist`
 
