@@ -255,6 +255,7 @@ func (r *runner) createContext() (*TemplateContext, error) {
 			Hostname: h.Hostname,
 			Labels:   LabelMap(h.Labels),
 		}
+
 		hosts = append(hosts, host)
 	}
 	
@@ -288,7 +289,7 @@ func (r *runner) createContext() (*TemplateContext, error) {
 		}
 		h.Containers = svcContainers
 	}
-	
+
 	services := make([]Service, 0)
 	for _, s := range metaServices {
 		service := Service{
