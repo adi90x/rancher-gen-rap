@@ -273,6 +273,7 @@ func (r *runner) createContext() (*TemplateContext, error) {
 		for _, h := range hosts {
 			if h.UUID == c.HostUUID {
 				container.Host = h
+				h.Containers = append(h.Containers, c)
 				break
 			}
 		}
