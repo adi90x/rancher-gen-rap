@@ -283,6 +283,8 @@ func (r *runner) createContext() (*TemplateContext, error) {
 	for _, h := range hosts {
 		svcContainers := make([]Container, 0)
 		for _, c := range containers {
+				log.Debugf("host name: %v", h.Name)
+				log.Debugf("Containers host name: %v", c.Host.Name)
 			if c.Host.Name == h.Name {
 				svcContainers = append(svcContainers, c)
 			}
