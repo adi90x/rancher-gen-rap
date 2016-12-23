@@ -10,6 +10,7 @@ image: golang:1.7.4-alpine
 compile-go:
   stage: build
   script:
+    - export RAP_EDITION=$CI_BUILD_REF_NAME
     - apk add --no-cache git
     - cd /builds/adi90x/rancher-gen-rap
     - go get github.com/Sirupsen/logrus
