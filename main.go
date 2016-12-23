@@ -11,7 +11,7 @@ import (
 var (
 	// Must be set at build time
 	Version string = "RAP Edition"
-	GitSHA  string = "latest"
+	GitSHA  string = getenv("RAP_EDITION","latest")
 
 	configFile      string
 	metadataVersion string
@@ -24,6 +24,14 @@ var (
 	includeInactive bool
 	interval        int
 )
+//helper to get env value or default value
+func getenv(key, fallback string) string {
+    value := os.Getenv(key)
+    if len(value) == 0 {
+        return fallback
+    }
+    return value
+}
 
 func init() {
 	log.SetFormatter(&log.TextFormatter{DisableTimestamp: true})
