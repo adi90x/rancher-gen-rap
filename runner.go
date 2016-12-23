@@ -286,10 +286,12 @@ func (r *runner) createContext() (*TemplateContext, error) {
 				log.Debugf("host name: %v", h.Name)
 				log.Debugf("Containers host name: %v", c.Host.Name)
 			if c.Host.Name == h.Name {
+				log.Debugf("On ajoute donc le containers", c.Name)
 				svcContainers = append(svcContainers, c)
 			}
 		}
 		h.Containers = svcContainers
+		log.Debugf("On ajoute donc le containers", h.Containers)
 	}
 
 	services := make([]Service, 0)
