@@ -27,11 +27,12 @@ type Container struct {
 
 // Host represents a Rancher Host.
 type Host struct {
-	UUID     string
-	Name     string
-	Address  string
-	Hostname string
-	Labels   LabelMap
+	UUID       string
+	Name       string
+	Address    string
+	Hostname   string
+	Labels     LabelMap
+	Containers []Container
 }
 
 // Self contains information about the container running this application.

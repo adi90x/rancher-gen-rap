@@ -200,6 +200,7 @@ func copyStagingToDestination(stagingPath, destPath string) error {
 	// A 'device busy' error could mean that the files live in
 	// different mounts. Try to read the staging file and write
 	// it's content to the destination file.
+	
 	log.Debugf("Failed to rename staging file: %v", err)
 
 	content, err := ioutil.ReadFile(stagingPath)
@@ -254,6 +255,13 @@ func (r *runner) createContext() (*TemplateContext, error) {
 			Hostname: h.Hostname,
 			Labels:   LabelMap(h.Labels),
 		}
+		svcContainers := make([]Container, 0)
+		for _, c := range containers {
+			if c.Host == h.Name {
+				svcContainers = append(svcContainers, c)
+			}
+		}
+		host.Containers = svcContainers
 		hosts = append(hosts, host)
 	}
 
