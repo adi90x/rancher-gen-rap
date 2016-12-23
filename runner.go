@@ -343,7 +343,7 @@ func parseServicePorts(ports []string) []ServicePort {
 			public := parts[1]
 			log.Warnf("Value of public : %s", public)
 			log.Warnf("Value of externalip : %s", externalip)
-			if parts_ := strings.Split(parts[1], "/"); len(parts_) == 2 {
+			if parts_ := strings.Split(parts[2], "/"); len(parts_) == 2 {
 				log.Warnf("Value of parts_ : %s", parts_)
 				ret = append(ret, ServicePort{
 				    ExternalIp:   externalip,
