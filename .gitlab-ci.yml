@@ -10,13 +10,12 @@ image: golang:1.7.4-alpine
 compile-go:
   stage: build
   script:
-    - export RAP_EDITION=$CI_BUILD_REF_NAME
     - apk add --no-cache git
     - cd /builds/adi90x/rancher-gen-rap
     - go get github.com/Sirupsen/logrus
     - go get github.com/BurntSushi/toml
     - go get github.com/rancher/go-rancher-metadata/metadata
-    - go build 
+    - go build -ldflags "-X main.GitSHA=$CI_BUILD_REF_NAME"
     - ./rancher-gen-rap  --version
     - mv rancher-gen-rap rancher-gen
   artifacts:
