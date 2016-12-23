@@ -43,6 +43,7 @@ type Self struct {
 
 // ServicePort represents a port exposed by a service
 type ServicePort struct {
+    ExternalIp   string
 	PublicPort   string
 	InternalPort string
 	Protocol     string

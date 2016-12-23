@@ -319,10 +319,12 @@ func (r *runner) createContext() (*TemplateContext, error) {
 func parseServicePorts(ports []string) []ServicePort {
 	var ret []ServicePort
 	for _, port := range ports {
-		if parts := strings.Split(port, ":"); len(parts) == 2 {
+		parts := strings.Split(port, ":")
+		if  len(parts) == 2 {
 			public := parts[0]
 			if parts_ := strings.Split(parts[1], "/"); len(parts_) == 2 {
 				ret = append(ret, ServicePort{
+				    ExternalIp:   "",
 					PublicPort:   public,
 					InternalPort: parts_[0],
 					Protocol:     parts_[1],
@@ -330,6 +332,20 @@ func parseServicePorts(ports []string) []ServicePort {
 				continue
 			}
 		}
+		if  len(parts) == 3 {
+			externalip := parts[0]
+			public := parts[1]
+			if parts_ := strings.Split(parts[2], "/"); len(parts_) == 2 {
+				ret = append(ret, ServicePort{
+				    ExternalIp:   externalip,
+					PublicPort:   public,
+					InternalPort: parts_[0],
+					Protocol:     parts_[1],
+				})
+				continue
+			}
+		}
+		
 		log.Warnf("Unexpected format of service port: %s", port)
 	}
 
