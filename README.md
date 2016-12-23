@@ -49,6 +49,15 @@ Original Go strings.TrimSpace function
 
 Function from jwilder/dockergen : list files from a directory .
 
+### Update Port struct (to get the external ip containers are listening on)
+
+type Port struct {
+    ExternalIp   string
+	PublicPort   string
+	InternalPort string
+	Protocol     string
+}
+
 
 # Below is taken from the ORIGINAL README
 
