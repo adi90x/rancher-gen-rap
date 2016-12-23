@@ -11,7 +11,7 @@ import (
 var (
 	// Must be set at build time
 	Version string = "RAP Edition"
-	GitSHA  string = getenv("RAP_EDITION","latest")
+	GitSHA  string = "latest"
 
 	configFile      string
 	metadataVersion string
