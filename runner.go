@@ -319,15 +319,10 @@ func (r *runner) createContext() (*TemplateContext, error) {
 func parseServicePorts(ports []string) []ServicePort {
 	var ret []ServicePort
 	for _, port := range ports {
-		log.Warnf("Value of port : %s", port)
 		parts := strings.Split(port, ":")
-		log.Warnf("Value of parts : %s", parts)
 		if  len(parts) == 2 {
-			log.Warnf("Value of parts : %s", parts)
 			public := parts[0]
-			log.Warnf("Value of public : %s", public)
 			if parts_ := strings.Split(parts[1], "/"); len(parts_) == 2 {
-				log.Warnf("Value of parts_ : %s", parts_)
 				ret = append(ret, ServicePort{
 				    ExternalIp:   "",
 					PublicPort:   public,
@@ -338,13 +333,9 @@ func parseServicePorts(ports []string) []ServicePort {
 			}
 		}
 		if  len(parts) == 3 {
-			log.Warnf("Value of parts : %s", parts)
 			externalip := parts[0]
 			public := parts[1]
-			log.Warnf("Value of public : %s", public)
-			log.Warnf("Value of externalip : %s", externalip)
 			if parts_ := strings.Split(parts[2], "/"); len(parts_) == 2 {
-				log.Warnf("Value of parts_ : %s", parts_)
 				ret = append(ret, ServicePort{
 				    ExternalIp:   externalip,
 					PublicPort:   public,
