@@ -320,13 +320,16 @@ func parseServicePorts(ports []string) []ServicePort {
 	var ret []ServicePort
 	for _, port := range ports {
 		log.Warnf("Value of port : %s", port)
-		if parts := strings.Split(port, ":"); len(parts) == 2 {
+		parts := strings.Split(port, ":")
+		log.Warnf("Value of parts : %s", parts)
+		if  len(parts) == 2 {
 			log.Warnf("Value of parts : %s", parts)
 			public := parts[0]
 			log.Warnf("Value of public : %s", public)
 			if parts_ := strings.Split(parts[1], "/"); len(parts_) == 2 {
 				log.Warnf("Value of parts_ : %s", parts_)
 				ret = append(ret, ServicePort{
+				    ExternalIp:   "",
 					PublicPort:   public,
 					InternalPort: parts_[0],
 					Protocol:     parts_[1],
@@ -334,6 +337,24 @@ func parseServicePorts(ports []string) []ServicePort {
 				continue
 			}
 		}
+		if  len(parts) == 3 {
+			log.Warnf("Value of parts : %s", parts)
+			externalip := parts[0]
+			public := parts[1]
+			log.Warnf("Value of public : %s", public)
+			log.Warnf("Value of externalip : %s", externalip)
+			if parts_ := strings.Split(parts[1], "/"); len(parts_) == 2 {
+				log.Warnf("Value of parts_ : %s", parts_)
+				ret = append(ret, ServicePort{
+				    ExternalIp:   externalip,
+					PublicPort:   public,
+					InternalPort: parts_[0],
+					Protocol:     parts_[1],
+				})
+				continue
+			}
+		}
+		
 		log.Warnf("Unexpected format of service port: %s", port)
 	}
 
