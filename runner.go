@@ -272,6 +272,7 @@ func (r *runner) createContext() (*TemplateContext, error) {
 		for _, h := range hosts {
 			if h.UUID == c.HostUUID {
 				container.Host = h
+				h.Containers = append(h.Containers, c)
 				break
 			}
 		}
@@ -286,7 +287,7 @@ func (r *runner) createContext() (*TemplateContext, error) {
 				svcContainers = append(svcContainers, c)
 			}
 		}
-		host.Containers = svcContainers
+		h.Containers = svcContainers
 	}
 	
 	services := make([]Service, 0)
