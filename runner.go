@@ -280,7 +280,7 @@ func (r *runner) createContext() (*TemplateContext, error) {
 	}
 	
 	//recreating hosts with the containers ?
-	hosts := make([]Host, 0)
+	hosts = make([]Host, 0)
 	for _, h := range metaHosts {
 		host := Host{
 			UUID:     h.UUID,
