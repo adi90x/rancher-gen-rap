@@ -68,6 +68,18 @@ type Host struct {
 	Containers  []Container
 }
 
+type Container struct {
+	Name    string
+	Address string
+	Stack   string
+	Service string
+	Health  string
+	State   string
+	Labels  LabelMap
+	Host    Host
+	ExternalIps     []string
+    ExternalPorts   []string
+}
 ```
 
 
