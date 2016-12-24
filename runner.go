@@ -277,6 +277,7 @@ func (r *runner) createContext() (*TemplateContext, error) {
 				break
 			}
 		}
+		container.Ports = parseServicePorts(c.Ports)
 		containers = append(containers, container)
 	}
 	

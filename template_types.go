@@ -23,8 +23,7 @@ type Container struct {
 	State   string
 	Labels  LabelMap
 	Host    Host
-	ExternalIps     []string
-    ExternalPorts   []string
+	Ports   []ServicePort
 }
 
 // Host represents a Rancher Host.
