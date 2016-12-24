@@ -279,7 +279,7 @@ func (r *runner) createContext() (*TemplateContext, error) {
 		containers = append(containers, container)
 	}
 	
-	//recreating hosts with the containers ?
+	//Degeulasse mais ca marche => A revoir ! 
 	hosts = make([]Host, 0)
 	for _, h := range metaHosts {
 		host := Host{
