@@ -279,6 +279,25 @@ func (r *runner) createContext() (*TemplateContext, error) {
 		}
 		containers = append(containers, container)
 	}
+	
+	hosts = make([]Host, 0)
+	for _, h := range metaHosts {
+		host := Host{
+			UUID:     h.UUID,
+			Name:     h.Name,
+			Address:  h.AgentIP,
+			Hostname: h.Hostname,
+			Labels:   LabelMap(h.Labels),
+		}
+		svcContainers := make([]Container, 0)
+		for _, c := range containers {
+			if c.Host.Name == h.Name {
+				svcContainers = append(svcContainers, c)
+			}
+		}
+		host.Containers = svcContainers
+		hosts = append(hosts, host)
+	}
 
 	services := make([]Service, 0)
 	for _, s := range metaServices {

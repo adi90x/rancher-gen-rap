@@ -34,6 +34,7 @@ type Host struct {
 	Address  string
 	Hostname string
 	Labels   LabelMap
+	Containers []Container
 }
 
 // Self contains information about the container running this application.
