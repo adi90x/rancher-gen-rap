@@ -279,19 +279,25 @@ func (r *runner) createContext() (*TemplateContext, error) {
 		containers = append(containers, container)
 	}
 	
-	//Adding Containers to Host need to reboucle pour avoir range host et range containers
-	for _, h := range hosts {
+	//recreating hosts with the containers ?
+	hosts := make([]Host, 0)
+	for _, h := range metaHosts {
+		host := Host{
+			UUID:     h.UUID,
+			Name:     h.Name,
+			Address:  h.AgentIP,
+			Hostname: h.Hostname,
+			Labels:   LabelMap(h.Labels),
+		}
 		svcContainers := make([]Container, 0)
 		for _, c := range containers {
-				log.Debugf("host name: %v", h.Name)
-				log.Debugf("Containers host name: %v", c.Host.Name)
-			if c.Host.Name == h.Name {
-				log.Debugf("On ajoute donc le containers", c.Name)
+			if c.Host.Name == h.Name  {
 				svcContainers = append(svcContainers, c)
 			}
 		}
-		h.Containers = svcContainers
-		log.Debugf("On ajoute donc le containers", h.Containers)
+		host.Containers = svcContainers
+
+		hosts = append(hosts, host)
 	}
 
 	services := make([]Service, 0)
