@@ -266,10 +266,7 @@ func (r *runner) createContext() (*TemplateContext, error) {
 			Service: c.ServiceName,
 			Health:  c.HealthState,
 			State:   c.State,
-			Labels:  LabelMap(c.Labels),
-			ExternalIps: c.Ips,
-			ExternalPorts: c.Ports,
-			
+			Labels:  LabelMap(c.Labels),		
 		}
 		for _, h := range hosts {
 			if h.UUID == c.HostUUID {
