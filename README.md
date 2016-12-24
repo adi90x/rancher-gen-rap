@@ -51,7 +51,7 @@ Function from jwilder/dockergen : list files from a directory .
 
 ### Update Port struct and Host struct (to get the external ip containers are listening on ans standalone containers)
 
-`
+```
 type Port struct {
     ExternalIp   string
 	PublicPort   string
@@ -68,7 +68,7 @@ type Host struct {
 	Containers  []Container
 }
 
-`
+```
 
 
 
