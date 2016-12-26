@@ -6,3 +6,7 @@
 
 secrets.txt
 .DS_Store
+
+/GoDeps
+
+rancher-gen-rap
