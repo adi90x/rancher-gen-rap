@@ -13,7 +13,7 @@ import (
 
 	log "github.com/Sirupsen/logrus"
 )
-//RAP : GroupbyMulti ( from jwilder/dockergen)
+//RAP : exists ( from jwilder/dockergen)
 func exists(path string) (bool, error) {
 	_, err := os.Stat(path)
 	if err == nil {
@@ -205,13 +205,44 @@ func groupByLabel(label string, in interface{}) (map[string][]interface{}, error
 
 	return m, nil
 }
+//RAP : filterByService => Return containers or service filter by service name
+
+func filterByService(service string, in interface{}) ([]interface{}, error) {
+	m := make([]interface{},0)
+
+	if in == nil {
+		return m, fmt.Errorf("(filterByService) input is nil")
+	}
+
+	switch typed := in.(type) {
+	case []Service:
+		for _, s := range typed {
+			if s.Name == service  {
+				m = append(m, s)
+			}
+		}
+	case []Container:
+		for _, c := range typed {
+			if c.Service == service  {
+				m = append(m, c)
+			}
+		}
+	case []Host:
+		return m, fmt.Errorf("(filterByService) can not filter Host.")
+
+	default:
+		return m, fmt.Errorf("(filterByService) invalid input type %T", in)
+	}
+
+	return m, nil
+}
 
 //RAP : GroupbyMulti ( from jwilder/dockergen)
 func groupByMulti(label string, sep string, in interface{}) (map[string][]interface{}, error) {
 	m := make(map[string][]interface{})
 
 	if in == nil {
-		return m, fmt.Errorf("(groupByLabel) input is nil")
+		return m, fmt.Errorf("(groupByMulti) input is nil")
 	}
 
 	switch typed := in.(type) {
