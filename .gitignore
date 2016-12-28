@@ -7,6 +7,6 @@
 secrets.txt
 .DS_Store
 
-/GoDeps
+/Godeps
 
 rancher-gen-rap
