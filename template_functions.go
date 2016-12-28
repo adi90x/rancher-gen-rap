@@ -119,7 +119,8 @@ func newFuncMap(ctx *TemplateContext) template.FuncMap {
 		"first":             arrayFirst,
 		"coalesce":          coalesce,
 		"trim":              strings.TrimSpace,
-		"dirList":               dirList,
+		"dirList":           dirList,
+                "filterByService":   filterByService,
 	}
 }
 
