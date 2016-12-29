@@ -120,7 +120,8 @@ func newFuncMap(ctx *TemplateContext) template.FuncMap {
 		"coalesce":          coalesce,
 		"trim":              strings.TrimSpace,
 		"dirList":           dirList,
-                "filterByService":   filterByService,
+        "filterByService":   filterByService,
+        "groupByMultiFilter": groupByMultiFilter,
 	}
 }
 
