@@ -278,11 +278,59 @@ func groupByMulti(label string, sep string, in interface{}) (map[string][]interf
 			}
 		}
 	default:
-		return m, fmt.Errorf("(groupByLabel) invalid input type %T", in)
+		return m, fmt.Errorf("(groupByMulti) invalid input type %T", in)
 	}
 
 	return m, nil
 }
+
+//RAP: groupByMultiFilter => group by multi but filter on service name ( use to get containers with no service name and threat them as standalone containers)
+func groupByMultiFilter(filter string, label string, sep string, in interface{}) (map[string][]interface{}, error) {
+	m := make(map[string][]interface{})
+
+	if in == nil {
+		return m, fmt.Errorf("(groupByMultiFilter) input is nil")
+	}
+
+	switch typed := in.(type) {
+	case []Service:
+		for _, s := range typed {
+			value, ok := s.Labels[label]
+			if ok && len(value) > 0 && s.Name == filter {
+				items := strings.Split(string(value), sep)
+				for _, item := range items {
+				m[item] = append(m[item], s)
+				}
+			}
+		}
+	case []Container:
+		for _, c := range typed {
+			value, ok := c.Labels[label]
+			if ok && len(value) > 0 && c.Service == filter {
+				items := strings.Split(string(value), sep)
+				for _, item := range items {
+				m[item] = append(m[item], c)
+				}
+			}
+		}
+	case []Host:
+		for _, h := range typed {
+			value, ok := h.Labels[label]
+			if ok && len(value) > 0 {
+				items := strings.Split(string(value), sep)
+				for _, item := range items {
+				m[item] = append(m[item], h)
+				}
+			}
+		}
+	default:
+		return m, fmt.Errorf("(groupByMultiFilter) invalid input type %T", in)
+	}
+
+	return m, nil
+}
+
+
 
 func whereLabel(funcName string, in interface{}, label string, test func(string, bool) bool) ([]interface{}, error) {
 	result := make([]interface{}, 0)
