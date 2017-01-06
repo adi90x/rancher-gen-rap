@@ -195,7 +195,7 @@ func getAllLabelValue(filter string,label string, sep string, in interface{}) ( 
 	case []Service:
 		for _, s := range typed {
 			value, ok := s.Labels[label]
-			if filter <> "*" {
+			if filter != string("*") {
 			    if ok && len(value) > 0 && s.Name == filter {
 				    items := strings.Split(string(value), sep)
 				    for _, item := range items {
@@ -216,7 +216,7 @@ func getAllLabelValue(filter string,label string, sep string, in interface{}) ( 
 	case []Container:
 		for _, c := range typed {
 			value, ok := c.Labels[label]
-			if filter <> "*" {
+			if filter != string("*") {
 			    if ok && len(value) > 0 && c.Service == filter {
 				    items := strings.Split(string(value), sep)
 				    for _, item := range items {
