@@ -139,6 +139,7 @@ func newFuncMap(ctx *TemplateContext) template.FuncMap {
 		"dirList":           dirList,
         "concatenateUnique":   concatenateUnique,
         "groupByMultiFilter": groupByMultiFilter,
+        "getAllLabelValue": getAllLabelValue,
 	}
 }
 
@@ -182,18 +183,12 @@ func hostsFunc(ctx *TemplateContext) func(...string) (interface{}, error) {
 	}
 }
 
-// groupByLabel takes a label key and a slice of services or hosts and returns a map based
-// on the values of the label.
-//
-// The map key is a string representing the label value. The map value is a
-// slice of services or hosts that have the corresponding label value.
-// Example:
-//    {{range $labelValue, $containers := svc.Containers | groupByLabel "foo"}}
-func groupByLabel(label string, in interface{}) (map[string][]interface{}, error) {
+//RAP : GroupbyMulti ( from jwilder/dockergen)
+func groupByMulti(label string, sep string, in interface{}) (map[string][]interface{}, error) {
 	m := make(map[string][]interface{})
 
 	if in == nil {
-		return m, fmt.Errorf("(groupByLabel) input is nil")
+		return m, fmt.Errorf("(groupByMulti) input is nil")
 	}
 
 	switch typed := in.(type) {
@@ -201,29 +196,106 @@ func groupByLabel(label string, in interface{}) (map[string][]interface{}, error
 		for _, s := range typed {
 			value, ok := s.Labels[label]
 			if ok && len(value) > 0 {
-				m[value] = append(m[value], s)
+				items := strings.Split(string(value), sep)
+				for _, item := range items {
+				m[item] = append(m[item], s)
+				}
 			}
 		}
 	case []Container:
 		for _, c := range typed {
 			value, ok := c.Labels[label]
 			if ok && len(value) > 0 {
-				m[value] = append(m[value], c)
+				items := strings.Split(string(value), sep)
+				for _, item := range items {
+				m[item] = append(m[item], c)
+				}
 			}
 		}
 	case []Host:
 		for _, h := range typed {
 			value, ok := h.Labels[label]
 			if ok && len(value) > 0 {
-				m[value] = append(m[value], h)
+				items := strings.Split(string(value), sep)
+				for _, item := range items {
+				m[item] = append(m[item], h)
+				}
 			}
 		}
 	default:
-		return m, fmt.Errorf("(groupByLabel) invalid input type %T", in)
+		return m, fmt.Errorf("(groupByMulti) invalid input type %T", in)
 	}
 
 	return m, nil
 }
+
+//RAP: getAllLabelValue => get all the value for a given label 
+func getAllLabelValue(filter string,label string, sep string, in interface{}) ( []string, error) {
+    m := make([]string{},0)
+    
+	if in == nil {
+		return m, fmt.Errorf("(getAllLabelValue) input is nil")
+	}
+
+	switch typed := in.(type) {
+	case []Service:
+		for _, s := range typed {
+			value, ok := s.Labels[label]
+			if filter <> "*" {
+			    if ok && len(value) > 0 && s.Name == filter {
+				    items := strings.Split(string(value), sep)
+				    for _, item := range items {
+				    m = append(m, items)
+				    }
+		    	}
+			} else
+			{
+			    if ok && len(value) > 0  {
+				    items := strings.Split(string(value), sep)
+				    for _, item := range items {
+				    m = append(m, items)
+				    }
+		    	}
+			}
+			
+		}
+	case []Container:
+		for _, c := range typed {
+			value, ok := c.Labels[label]
+			if filter <> "*" {
+			    if ok && len(value) > 0 && c.Service == filter {
+				    items := strings.Split(string(value), sep)
+				    for _, item := range items {
+				    m = append(m, items)
+				    }
+		    	}
+			} else
+			{
+			     if ok && len(value) > 0  {
+				    items := strings.Split(string(value), sep)
+				    for _, item := range items {
+				    m = append(m, items)
+				    }
+		    	}
+			}
+		}
+	case []Host:
+		for _, h := range typed {
+			value, ok := h.Labels[label]
+			if ok && len(value) > 0 {
+				items := strings.Split(string(value), sep)
+				for _, item := range items {
+				m = append(m, items)
+				}
+			}
+		}
+	default:
+		return m, fmt.Errorf("(getAllLabelValue) invalid input type %T", in)
+	}
+
+	return m, nil
+}
+
 //RAP : filterByService => Return containers or service filter by service name
 
 func filterByService(service string, in interface{}) ([]interface{}, error) {
