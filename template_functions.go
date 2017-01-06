@@ -183,8 +183,51 @@ func hostsFunc(ctx *TemplateContext) func(...string) (interface{}, error) {
 	}
 }
 
+// groupByLabel takes a label key and a slice of services or hosts and returns a map based
+// on the values of the label.
+//
+// The map key is a string representing the label value. The map value is a
+// slice of services or hosts that have the corresponding label value.
+// Example:
+//    {{range $labelValue, $containers := svc.Containers | groupByLabel "foo"}}
+func groupByLabel(label string, in interface{}) (map[string][]interface{}, error) {
+	m := make(map[string][]interface{})
+
+	if in == nil {
+		return m, fmt.Errorf("(groupByLabel) input is nil")
+	}
+
+	switch typed := in.(type) {
+	case []Service:
+		for _, s := range typed {
+			value, ok := s.Labels[label]
+			if ok && len(value) > 0 {
+				m[value] = append(m[value], s)
+			}
+		}
+	case []Container:
+		for _, c := range typed {
+			value, ok := c.Labels[label]
+			if ok && len(value) > 0 {
+				m[value] = append(m[value], c)
+			}
+		}
+	case []Host:
+		for _, h := range typed {
+			value, ok := h.Labels[label]
+			if ok && len(value) > 0 {
+				m[value] = append(m[value], h)
+			}
+		}
+	default:
+		return m, fmt.Errorf("(groupByLabel) invalid input type %T", in)
+	}
+
+	return m, nil
+}
+
 //RAP: getAllLabelValue => get all the value for a given label 
-func getAllLabelValue(filter string,label string, sep string, in interface{}) ( []string, error) {
+func getAllLabelValue(filter string,label string, sep string, in interface{}) ([]string{}, error) {
     m := make([]string{},0)
     
 	if in == nil {
