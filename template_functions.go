@@ -139,6 +139,7 @@ func newFuncMap(ctx *TemplateContext) template.FuncMap {
 		"dirList":           dirList,
         "concatenateUnique":   concatenateUnique,
         "groupByMultiFilter": groupByMultiFilter,
+        "getAllLabelValue": getAllLabelValue,
 	}
 }
 
@@ -224,6 +225,74 @@ func groupByLabel(label string, in interface{}) (map[string][]interface{}, error
 
 	return m, nil
 }
+
+//RAP: getAllLabelValue => get all the value for a given label 
+func getAllLabelValue(filter string,label string, sep string, in interface{}) ([]string, error) {
+    m := make([]string,0)
+    
+	if in == nil {
+		return m, fmt.Errorf("(getAllLabelValue) input is nil")
+	}
+
+	switch typed := in.(type) {
+	case []Service:
+		for _, s := range typed {
+			value, ok := s.Labels[label]
+			if filter != string("*") {
+			    if ok && len(value) > 0 && s.Name == filter {
+				    items := strings.Split(string(value), sep)
+				    for _, item := range items {
+				    m = append(m, item)
+				    }
+		    	}
+			} else
+			{
+			    if ok && len(value) > 0  {
+				    items := strings.Split(string(value), sep)
+				    for _, item := range items {
+				    m = append(m, item)
+				    }
+		    	}
+			}
+			
+		}
+	case []Container:
+		for _, c := range typed {
+			value, ok := c.Labels[label]
+			if filter != string("*") {
+			    if ok && len(value) > 0 && c.Service == filter {
+				    items := strings.Split(string(value), sep)
+				    for _, item := range items {
+				    m = append(m, item)
+				    }
+		    	}
+			} else
+			{
+			     if ok && len(value) > 0  {
+				    items := strings.Split(string(value), sep)
+				    for _, item := range items {
+				    m = append(m, item)
+				    }
+		    	}
+			}
+		}
+	case []Host:
+		for _, h := range typed {
+			value, ok := h.Labels[label]
+			if ok && len(value) > 0 {
+				items := strings.Split(string(value), sep)
+				for _, item := range items {
+				m = append(m, item)
+				}
+			}
+		}
+	default:
+		return m, fmt.Errorf("(getAllLabelValue) invalid input type %T", in)
+	}
+
+	return m, nil
+}
+
 //RAP : filterByService => Return containers or service filter by service name
 
 func filterByService(service string, in interface{}) ([]interface{}, error) {
