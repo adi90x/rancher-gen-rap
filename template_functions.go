@@ -227,8 +227,8 @@ func groupByLabel(label string, in interface{}) (map[string][]interface{}, error
 }
 
 //RAP: getAllLabelValue => get all the value for a given label 
-func getAllLabelValue(filter string,label string, sep string, in interface{}) ([]string{}, error) {
-    m := make([]string{},0)
+func getAllLabelValue(filter string,label string, sep string, in interface{}) ([]string, error) {
+    m := make([]string,0)
     
 	if in == nil {
 		return m, fmt.Errorf("(getAllLabelValue) input is nil")
@@ -242,7 +242,7 @@ func getAllLabelValue(filter string,label string, sep string, in interface{}) ([
 			    if ok && len(value) > 0 && s.Name == filter {
 				    items := strings.Split(string(value), sep)
 				    for _, item := range items {
-				    m = append(m, items)
+				    m = append(m, item)
 				    }
 		    	}
 			} else
@@ -250,7 +250,7 @@ func getAllLabelValue(filter string,label string, sep string, in interface{}) ([
 			    if ok && len(value) > 0  {
 				    items := strings.Split(string(value), sep)
 				    for _, item := range items {
-				    m = append(m, items)
+				    m = append(m, item)
 				    }
 		    	}
 			}
@@ -263,7 +263,7 @@ func getAllLabelValue(filter string,label string, sep string, in interface{}) ([
 			    if ok && len(value) > 0 && c.Service == filter {
 				    items := strings.Split(string(value), sep)
 				    for _, item := range items {
-				    m = append(m, items)
+				    m = append(m, item)
 				    }
 		    	}
 			} else
@@ -271,7 +271,7 @@ func getAllLabelValue(filter string,label string, sep string, in interface{}) ([
 			     if ok && len(value) > 0  {
 				    items := strings.Split(string(value), sep)
 				    for _, item := range items {
-				    m = append(m, items)
+				    m = append(m, item)
 				    }
 		    	}
 			}
@@ -282,7 +282,7 @@ func getAllLabelValue(filter string,label string, sep string, in interface{}) ([
 			if ok && len(value) > 0 {
 				items := strings.Split(string(value), sep)
 				for _, item := range items {
-				m = append(m, items)
+				m = append(m, item)
 				}
 			}
 		}
