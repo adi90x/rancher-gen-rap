@@ -86,6 +86,23 @@ func dirList(path string) ([]string, error) {
 	return names, nil
 }
 
+//RAP : Combine  two string slice and remove duplicate
+func concatenateUnique(slice1 []string, slice2 []string) []string {
+    elements := append(slice1, slice2...)
+    encountered := map[string]bool{}
+    // Create a map of all unique elements.
+    for v:= range elements {
+	encountered[elements[v]] = true
+    }
+    // Place all keys from the map into a slice.
+    result := []string{}
+    for key, _ := range encountered {
+	result = append(result, key)
+    }
+    return result
+}
+
+
 func newFuncMap(ctx *TemplateContext) template.FuncMap {
 	return template.FuncMap{
 		// Utility funcs
@@ -120,7 +137,7 @@ func newFuncMap(ctx *TemplateContext) template.FuncMap {
 		"coalesce":          coalesce,
 		"trim":              strings.TrimSpace,
 		"dirList":           dirList,
-        "filterByService":   filterByService,
+        "concatenateUnique":   concatenateUnique,
         "groupByMultiFilter": groupByMultiFilter,
 	}
 }
