@@ -106,7 +106,14 @@ func concatenateUnique(slice1 []string, slice2 []string) []string {
     }
     return result
 }
-
+//RAP :  when returns the trueValue when the condition is true and the falseValue otherwise
+func when(condition bool, trueValue, falseValue interface{}) interface{} {
+	if condition {
+		return trueValue
+	} else {
+		return falseValue
+	}
+}
 
 func newFuncMap(ctx *TemplateContext) template.FuncMap {
 	return template.FuncMap{
@@ -143,6 +150,7 @@ func newFuncMap(ctx *TemplateContext) template.FuncMap {
 		"coalesce":          coalesce,
 		"trim":              strings.TrimSpace,
 		"dirList":           dirList,
+		"when":                   when,
         "concatenateUnique":   concatenateUnique,
         "groupByMultiFilter": groupByMultiFilter,
         "getAllLabelValue": getAllLabelValue,
