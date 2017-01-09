@@ -63,6 +63,11 @@ func arrayFirst(input interface{}) interface{} {
 
 	return arr.Index(0).Interface()
 }
+//RAP : arrayLast ( from jwilder/dockergen)
+func arrayLast(input interface{}) interface{} {
+	arr := reflect.ValueOf(input)
+	return arr.Index(arr.Len() - 1).Interface()
+}
 //RAP : coalesce ( from jwilder/dockergen)
 func coalesce(input ...interface{}) interface{} {
 	for _, v := range input {
@@ -134,6 +139,7 @@ func newFuncMap(ctx *TemplateContext) template.FuncMap {
 		"trimSuffix":        strings.TrimSuffix,
 		"closest":           arrayClosest,
 		"first":             arrayFirst,
+		"last":              arrayLast,
 		"coalesce":          coalesce,
 		"trim":              strings.TrimSpace,
 		"dirList":           dirList,
