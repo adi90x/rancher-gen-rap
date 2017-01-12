@@ -114,6 +114,15 @@ func when(condition bool, trueValue, falseValue interface{}) interface{} {
 		return falseValue
 	}
 }
+//RAP :  return a string with no "_", ",",";" to create a clean name
+func formatClean(toclean string ) string {
+	cleaned := string
+	cleaned = strings.Replace(toclean,"_","",-1)
+	cleaned = strings.Replace(cleaned,",","",-1)
+	cleaned = strings.Replace(cleaned,";","",-1)
+	cleaned = strings.Replace(cleaned," ","",-1)
+	return cleaned
+}
 
 func newFuncMap(ctx *TemplateContext) template.FuncMap {
 	return template.FuncMap{
@@ -154,6 +163,7 @@ func newFuncMap(ctx *TemplateContext) template.FuncMap {
         "concatenateUnique":   concatenateUnique,
         "groupByMultiFilter": groupByMultiFilter,
         "getAllLabelValue": getAllLabelValue,
+		"formatClean": formatClean,
 	}
 }
 
