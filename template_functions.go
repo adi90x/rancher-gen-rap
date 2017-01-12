@@ -120,6 +120,7 @@ func formatClean(toclean string ) string {
 	cleaned = strings.Replace(cleaned,",","",-1)
 	cleaned = strings.Replace(cleaned,";","",-1)
 	cleaned = strings.Replace(cleaned," ","",-1)
+	cleaned = strings.Replace(cleaned,".","",-1)
 	return cleaned
 }
 
