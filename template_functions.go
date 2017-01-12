@@ -116,8 +116,7 @@ func when(condition bool, trueValue, falseValue interface{}) interface{} {
 }
 //RAP :  return a string with no "_", ",",";" to create a clean name
 func formatClean(toclean string ) string {
-	cleaned := string
-	cleaned = strings.Replace(toclean,"_","",-1)
+	cleaned := strings.Replace(toclean,"_","",-1)
 	cleaned = strings.Replace(cleaned,",","",-1)
 	cleaned = strings.Replace(cleaned,";","",-1)
 	cleaned = strings.Replace(cleaned," ","",-1)
