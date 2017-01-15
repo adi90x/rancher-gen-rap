@@ -149,21 +149,22 @@ func newFuncMap(ctx *TemplateContext) template.FuncMap {
 		"groupByLabel":      groupByLabel,
 		
 		//Add for Rancher-Active-Proxy (from jwilder/docker-gen)
-		"exists":            exists,
-		"groupByMulti":      groupByMulti,
-		"dict":              dict,
-		"trimSuffix":        strings.TrimSuffix,
-		"closest":           arrayClosest,
-		"first":             arrayFirst,
-		"last":              arrayLast,
-		"coalesce":          coalesce,
-		"trim":              strings.TrimSpace,
-		"dirList":           dirList,
-		"when":                   when,
-        "concatenateUnique":   concatenateUnique,
-        "groupByMultiFilter": groupByMultiFilter,
-        "getAllLabelValue": getAllLabelValue,
-		"formatClean": formatClean,
+		"exists":           	exists,
+		"groupByMulti":      	groupByMulti,
+		"dict":              	dict,
+		"trimSuffix":        	strings.TrimSuffix,
+		"closest":           	arrayClosest,
+		"first":             	arrayFirst,
+		"last":              	arrayLast,
+		"coalesce":          	coalesce,
+		"trim":              	strings.TrimSpace,
+		"dirList":           	dirList,
+		"when":                 when,
+        	"concatenateUnique":    concatenateUnique,
+        	"groupByMultiFilter": 	groupByMultiFilter,
+        	"getAllLabelValue":	getAllLabelValue,
+		"formatClean": 		formatClean,
+		"filterHost":           filterHost,
 	}
 }
 
@@ -441,7 +442,49 @@ func groupByMultiFilter(filter string, label string, sep string, in interface{})
 	return m, nil
 }
 
+//RAP: filterHost => filter on Host name ( use to get containers on a specific host name )
+func filterHost(filter string, in interface{}) ([]interface{}, error) {
+	m := make([]interface{},0)
+	if in == nil {
+		return m, fmt.Errorf("(groupByMultiFilterHost) input is nil")
+	}
 
+	switch typed := in.(type) {
+	case []Service:
+		return m, fmt.Errorf("(groupByMultiFilterHost) cannot filter on services")
+	case []Container:
+		if filter == string("*") {
+			for _, c := range typed {		
+					m = append(m, c)				
+			}
+		} else
+			{
+			 for _, c := range typed {
+				if c.Host.Name == filter {				
+					m = append(m, c)				
+				}
+			}
+		}
+	case []Host:
+		if filter == string("*") {
+			for _, c := range typed {		
+					m = append(m, c)				
+			}
+		} else
+			{
+			 for _, h := range typed {
+				if  h.Name == filter {
+					m = append(m, h)
+				}
+			}
+		}
+
+	default:
+		return m, fmt.Errorf("(groupByMultiFilterHost) invalid input type %T", in)
+	}
+
+	return m, nil
+}
 
 func whereLabel(funcName string, in interface{}, label string, test func(string, bool) bool) ([]interface{}, error) {
 	result := make([]interface{}, 0)
