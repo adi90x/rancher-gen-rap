@@ -443,13 +443,13 @@ func groupByMultiFilter(filter string, label string, sep string, in interface{})
 }
 
 //RAP: filterHost => filter on Host name ( use to get containers on a specific host name )
-func filterHost(filter string, in interface{}) ([]interface{}, error) {
+func filterHost(filter string, in []interface{}) ([]interface{}, error) {
 	m := make([]interface{},0)
 	if in == nil {
 		return m, fmt.Errorf("(groupByMultiFilterHost) input is nil")
 	}
 
-	switch typed := in.(type) {
+	switch typed := in[0].(type) {
 	case []Service:
 		return m, fmt.Errorf("(groupByMultiFilterHost) cannot filter on services")
 	case []Container:
