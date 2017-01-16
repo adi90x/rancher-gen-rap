@@ -1,5 +1,9 @@
 package main
 
+import (
+	"fmt"
+)
+
 // Service represents a Rancher service.
 type Service struct {
 	Name       string
