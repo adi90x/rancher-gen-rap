@@ -160,11 +160,12 @@ func newFuncMap(ctx *TemplateContext) template.FuncMap {
 		"trim":              	strings.TrimSpace,
 		"dirList":           	dirList,
 		"when":                 when,
-        	"concatenateUnique":    concatenateUnique,
-        	"groupByMultiFilter": 	groupByMultiFilter,
-        	"getAllLabelValue":	getAllLabelValue,
-		"formatClean": 		formatClean,
+        "concatenateUnique":    concatenateUnique,
+        "groupByMultiFilter": 	groupByMultiFilter,
+        "getAllLabelValue":	    getAllLabelValue,
+		"formatClean": 		    formatClean,
 		"filterHost":           filterHost,
+		"cell":                 NewCell,
 	}
 }
 

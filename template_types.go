@@ -1,5 +1,9 @@
 package main
 
+import (
+	"fmt"
+)
+
 // Service represents a Rancher service.
 type Service struct {
 	Name       string
@@ -96,3 +100,21 @@ func (m MetadataMap) GetValue(key string, v ...interface{}) interface{} {
 
 	return ""
 }
+
+//RAP Adding a storage place to enable modifying data inside template loop/conditional structure
+
+type Cell struct{ v interface{} }
+
+func NewCell(v ...interface{}) (*Cell, error) {
+	switch len(v) {
+	case 0:
+		return new(Cell), nil
+	case 1:
+		return &Cell{v[0]}, nil
+	default:
+		return nil, fmt.Errorf("wrong number of args: want 0 or 1, got %v", len(v))
+	}
+}
+
+func (c *Cell) Set(v interface{}) *Cell { c.v = v; return c }
+func (c *Cell) Get() interface{}        { return c.v }
