@@ -15,7 +15,7 @@ compile-go:
     - go get github.com/Sirupsen/logrus
     - go get github.com/BurntSushi/toml
     - go get github.com/rancher/go-rancher-metadata/metadata
-    - go build -ldflags "-X main.Version=RAP Edition $CI_BUILD_REF_NAME main.GitSHA=$CI_BUILD_REF"
+    - go build -ldflags "-X 'main.Version=RAP Edition $CI_BUILD_REF_NAME' -X main.GitSHA=$CI_BUILD_REF"
     - ./rancher-gen-rap  --version
     - mv rancher-gen-rap rancher-gen
   artifacts:
