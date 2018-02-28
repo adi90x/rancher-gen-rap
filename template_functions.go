@@ -462,6 +462,24 @@ func filterHost(filter string, in []Container) ([]Container, error) {
 	return m, nil
 }
 
+//RAP: filterLabel => filter on a label name ( use to get containers that match a specific label )
+func filterLabel(label string,filter string, in []Container) ([]Container, error) {
+	if filter == string("*") {
+	return in,nil
+	}
+	m := make([]Container,0)
+	if in == nil {
+		return m, fmt.Errorf("(filterHost) input is nil")
+	}
+	var re = regexp.MustCompile(filter)
+	for _, c := range in {
+			if re.FindStringSubmatch(c.Labels[label]) {
+				m = append(m, c)
+			}
+		}
+	return m, nil
+}
+
 func whereLabel(funcName string, in interface{}, label string, test func(string, bool) bool) ([]interface{}, error) {
 	result := make([]interface{}, 0)
 	if in == nil {
