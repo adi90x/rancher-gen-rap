@@ -473,7 +473,7 @@ func filterLabel(label string,filter string, in []Container) ([]Container, error
 	}
 	var re = regexp.MustCompile(filter)
 	for _, c := range in {
-			if re.FindStringSubmatch(c.Labels[label]) {
+			if re.Match([]byte(c.Labels[label])) {
 				m = append(m, c)
 			}
 		}
