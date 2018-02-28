@@ -469,7 +469,7 @@ func filterLabel(label string,filter string, in []Container) ([]Container, error
 	}
 	m := make([]Container,0)
 	if in == nil {
-		return m, fmt.Errorf("(filterHost) input is nil")
+		return m, fmt.Errorf("(filterLabel) input is nil")
 	}
 	var re = regexp.MustCompile(filter)
 	for _, c := range in {
