@@ -166,6 +166,7 @@ func newFuncMap(ctx *TemplateContext) template.FuncMap {
         "getAllLabelValue":	    getAllLabelValue,
 		"formatClean": 		    formatClean,
 		"filterHost":           filterHost,
+		"filterLabel":          filterLabel,
 		"cell":                 NewCell,
 	}
 }
